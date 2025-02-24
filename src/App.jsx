@@ -1,0 +1,13 @@
+import { useState } from 'react'
+import TaskForm from './components/TaskForm'
+import TaskList from './components/TaskList'
+
+function App() {
+  return (
+    <>
+      <TaskList/>
+    </>
+  )
+}
+
+export default App
