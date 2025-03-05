@@ -1,35 +1,77 @@
-import { useState } from 'react'
+import { useState } from "react";
 
-function TaskItem({task, remove, changeState}) {
+function TaskItem({ task, remove, changeState }) {
+  const [state, setState] = useState(task.state);
+  const [msg, setMsg] = useState("");
 
-    const changeTaskState = e => {
-        console.log(e)
-        task.state = e.target.name
-    }
+  const changeTaskState = () => {
+    const prevState = task.state;
+    task.state = state;
+    changeState(task);
+    setMsg(`Task state successfully changed from ${prevState} to ${task.state}`);
+  };
 
-    return (
-        <>
-            <div>
-                <h2>{task.name}</h2>
-                <p>{task.description}</p>
+  return (
+    <>
+      <div>
+        <h2>{task.name}</h2>
+        <p>{task.description}</p>
 
-                <label>Nebaigtas</label>
-                <input onChange={e => changeTaskState(e)} type="radio" id="unfinishedState" name="Taskstate"></input>
-                
-                <label>Baigtas</label>
-                <input onChange={e => changeTaskState(e)} type="radio" id="finishedState" name="Taskstate"></input>
+        <label>
+          <input
+            type="radio"
+            id="unfinishedState"
+            name={`Taskstate-${task.id}`}
+            value="Nebaigtas"
+            checked={state === "Nebaigtas"}
+            onChange={(e) => setState(e.target.value)}
+          />
+          Nebaigtas
+        </label>
 
-                <label>Vykdomas</label>
-                <input onChange={e => changeTaskState(e)} type="radio" id="doingState" name="Taskstate"></input>
+        <label>
+          <input
+            type="radio"
+            id="finishedState"
+            name={`Taskstate-${task.id}`}
+            value="Baigtas"
+            checked={state === "Baigtas"}
+            onChange={(e) => setState(e.target.value)}
+          />
+          Baigtas
+        </label>
 
-                <label>Stabdytas:</label>
-                <input onChange={e => changeTaskState(e)} type="radio" id="onHoldState" name="Taskstate"></input>
+        <label>
+          <input
+            type="radio"
+            id="doingState"
+            name={`Taskstate-${task.id}`}
+            value="Vykdomas"
+            checked={state === "Vykdomas"}
+            onChange={(e) => setState(e.target.value)}
+          />
+          Vykdomas
+        </label>
 
-                <button onClick={changeState()}>Pakeisti būseną</button>
-                <button onClick={deleteTask()}>Trinti</button>
-            </div>
-        </>
-    )
+        <label>
+          <input
+            type="radio"
+            id="onHoldState"
+            name={`Taskstate-${task.id}`}
+            value="Stabdytas"
+            checked={state === "Stabdytas"}
+            onChange={(e) => setState(e.target.value)}
+          />
+          Stabdytas
+        </label>
+
+        <button onClick={changeTaskState}>Pakeisti būseną</button>
+        <button onClick={() => remove(task)}>Trinti</button>
+
+        {msg && <p>{msg}</p>}
+      </div>
+    </>
+  );
 }
 
-export default TaskItem
+export default TaskItem;

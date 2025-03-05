@@ -1,69 +1,94 @@
-import { useState, useRef } from 'react'
+import { useState, useRef } from "react";
 
+function TaskForm({ add }) {
+  const taskNameRef = useRef(null);
+  const taskDescriptionRef = useRef(null);
 
-function TaskForm({add}) {
+  const [taskState, setTaskState] = useState("");
+  const [msg, setMsg] = useState("");
 
-    const taskNameRef = useRef(null)
-    const taskDescriptionRef = useRef(null)
-    const taskStateRef = useRef(null)
+  const addTask = (e) => {
+    e.preventDefault();
 
-    const [msg, setMsg] = useState("");
+    const taskNameValue = taskNameRef.current.value;
+    const taskDescriptionValue = taskDescriptionRef.current.value;
 
-    const addTask = e => {
-        e.preventDefault()
-
-        const taskNameValue = taskNameRef.current.value
-        const taskDescriptionValue = taskNameRef.current.value
-        const taskStateValue = taskNameRef.current.value
-
-        if(!taskNameValue || !taskDescriptionValue || !taskStateValue) {
-            setMsg("Įveskite visas laukus!")
-            return;
-        }
-
-
-        const task = {
-            id: crypto.randomUUID(),
-            name: taskNameValue,
-            description: taskDescriptionValue,
-            state: taskStateValue
-        }
-
-        console.log(task)
-
-        add(task);
-
-        setMsg("Užduotis sėkmingai pridėtas!")
+    if (!taskNameValue || !taskDescriptionValue || !taskState) {
+      setMsg("Įveskite visas laukus!");
+      return;
     }
 
-    return (
-        <>
-            <form onSubmit={e => addTask(e)}>
-                <label>Įveskite užduoties pavadinima:</label>
-                <input ref={taskNameRef} type="text" name="taskName"/>
+    const task = {
+      id: crypto.randomUUID(),
+      name: taskNameValue,
+      description: taskDescriptionValue,
+      state: taskState,
+    };
 
-                <label>Įveskite užduoties aprašyma:</label>
-                <input ref={taskDescriptionRef} type="text" name="taskDescription"/>
+    console.log(task);
 
-                <label>Įveskite užduoties būseną:</label>
+    add(task);
 
-                <label>Nebaigtas</label>
-                <input ref={taskStateRef} type="radio" id="unfinishedState" name="Taskstate"></input>
+    setMsg("Užduotis sėkmingai pridėta!");
+  };
 
-                <label>Baigtas</label>
-                <input ref={taskStateRef} type="radio" id="finishedState" name="Taskstate"></input>
+  return (
+    <>
+      <form onSubmit={addTask}>
+        <label>Įveskite užduoties pavadinimą:</label>
+        <input ref={taskNameRef} type="text" name="taskName" />
 
-                <label>Vykdomas</label>
-                <input ref={taskStateRef} type="radio" id="doingState" name="Taskstate"></input>
+        <label>Įveskite užduoties aprašymą:</label>
+        <input ref={taskDescriptionRef} type="text" name="taskDescription" />
 
-                <label>Stabdytas:</label>
-                <input ref={taskStateRef} type="radio" id="onHoldState" name="Taskstate"></input>
+        <label>Įveskite užduoties būseną:</label>
 
-                
-                <button type="submit">Pridėti</button>
-            </form>
-        </>
-    )
+        <label>
+          <input
+            type="radio"
+            name="Taskstate"
+            value="Nebaigtas"
+            onChange={(e) => setTaskState(e.target.value)}
+          />
+          Nebaigtas
+        </label>
+
+        <label>
+          <input
+            type="radio"
+            name="Taskstate"
+            value="Baigtas"
+            onChange={(e) => setTaskState(e.target.value)}
+          />
+          Baigtas
+        </label>
+
+        <label>
+          <input
+            type="radio"
+            name="Taskstate"
+            value="Vykdomas"
+            onChange={(e) => setTaskState(e.target.value)}
+          />
+          Vykdomas
+        </label>
+
+        <label>
+          <input
+            type="radio"
+            name="Taskstate"
+            value="Stabdytas"
+            onChange={(e) => setTaskState(e.target.value)}
+          />
+          Stabdytas
+        </label>
+
+        <button type="submit">Pridėti</button>
+      </form>
+
+      {msg && <p>{msg}</p>}
+    </>
+  );
 }
 
-export default TaskForm
+export default TaskForm;

@@ -23,8 +23,8 @@ function TaskList() {
     }
 
     const changeState = taskToChange => {
-        updatedTasks = tasks.map(task => {
-            task.id === taskToChange.id ? { ...task, state: taskToChange.state} : state
+        const updatedTasks = tasks.map(task => {
+            return task.id == taskToChange.id ? { ...task, state: taskToChange.state} : task;
         })
         setTasks(updatedTasks)
     }
