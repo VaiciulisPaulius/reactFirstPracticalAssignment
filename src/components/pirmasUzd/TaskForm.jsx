@@ -35,53 +35,58 @@ function TaskForm({ add }) {
   return (
     <>
       <form onSubmit={addTask}>
-        <label>Įveskite užduoties pavadinimą:</label>
-        <input ref={taskNameRef} type="text" name="taskName" />
+        <div>
+          <label>Įveskite užduoties pavadinimą:</label>
+          <input ref={taskNameRef} type="text" name="taskName" />
+        </div>
 
-        <label>Įveskite užduoties aprašymą:</label>
-        <input ref={taskDescriptionRef} type="text" name="taskDescription" />
+        <div>
+          <label>Įveskite užduoties aprašymą:</label>
+          <input ref={taskDescriptionRef} type="text" name="taskDescription" />
+        </div>
 
-        <label>Įveskite užduoties būseną:</label>
+        <div>
+          <label>Įveskite užduoties būseną:</label>
+          <label>
+            <input
+              type="radio"
+              name="Taskstate"
+              value="Nebaigtas"
+              onChange={(e) => setTaskState(e.target.value)}
+            />
+            Nebaigtas
+          </label>
 
-        <label>
-          <input
-            type="radio"
-            name="Taskstate"
-            value="Nebaigtas"
-            onChange={(e) => setTaskState(e.target.value)}
-          />
-          Nebaigtas
-        </label>
+          <label>
+            <input
+              type="radio"
+              name="Taskstate"
+              value="Baigtas"
+              onChange={(e) => setTaskState(e.target.value)}
+            />
+            Baigtas
+          </label>
 
-        <label>
-          <input
-            type="radio"
-            name="Taskstate"
-            value="Baigtas"
-            onChange={(e) => setTaskState(e.target.value)}
-          />
-          Baigtas
-        </label>
+          <label>
+            <input
+              type="radio"
+              name="Taskstate"
+              value="Vykdomas"
+              onChange={(e) => setTaskState(e.target.value)}
+            />
+            Vykdomas
+          </label>
 
-        <label>
-          <input
-            type="radio"
-            name="Taskstate"
-            value="Vykdomas"
-            onChange={(e) => setTaskState(e.target.value)}
-          />
-          Vykdomas
-        </label>
-
-        <label>
-          <input
-            type="radio"
-            name="Taskstate"
-            value="Stabdytas"
-            onChange={(e) => setTaskState(e.target.value)}
-          />
-          Stabdytas
-        </label>
+          <label>
+            <input
+              type="radio"
+              name="Taskstate"
+              value="Stabdytas"
+              onChange={(e) => setTaskState(e.target.value)}
+            />
+            Stabdytas
+          </label>
+        </div>
 
         <button type="submit">Pridėti</button>
       </form>

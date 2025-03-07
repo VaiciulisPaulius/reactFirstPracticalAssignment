@@ -3,6 +3,7 @@ import TaskForm from './components/pirmasUzd/TaskForm'
 import TaskList from './components/pirmasUzd/TaskList'
 import { Link, Route, Router, Routes } from 'react-router'
 import Cart from './components/antrasUzd/Cart'
+import GuessGame from './components/treciasUzd/GuessGame'
 
 function App() {
   return (
@@ -17,7 +18,7 @@ function App() {
       <Routes>
         <Route path="/pirmasUzd" element={<TaskList/>}></Route>
         <Route path="/antrasUzd" element={<Cart/>}></Route>
-        <Route path="/treciasUzd" element={<TaskList/>}></Route>
+        <Route path="/treciasUzd" element={<GuessGame/>}></Route>
       </Routes>
     </>
   )
